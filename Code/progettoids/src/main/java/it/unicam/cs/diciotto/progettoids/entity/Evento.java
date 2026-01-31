@@ -30,4 +30,25 @@ public class Evento extends BaseEntity {
 
     @ManyToMany
     private Set<Utente> partecipanti = new HashSet<>();
+
+    public Evento(String titolo, String dataInizio) {
+        this.titolo = titolo;
+        this.dataInizio = dataInizio;
+    }
+
+    public void addEspositore(Azienda azienda) {
+        if (azienda != null) {
+            espositori.add(azienda);
+        }
+    }
+
+    public void addPartecipante(Utente utente) {
+        if (utente != null) {
+            partecipanti.add(utente);
+        }
+    }
+
+    public boolean isPieno() {
+        return iscrittiAttuali >= maxPartecipanti;
+    }
 }

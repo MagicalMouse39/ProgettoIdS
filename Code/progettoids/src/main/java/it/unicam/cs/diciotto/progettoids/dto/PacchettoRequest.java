@@ -13,6 +13,6 @@ public class PacchettoRequest {
     private double prezzo;
     private int quantitaDisponibile;
     private String dataScadenza;
-    private String contenuto;
+    private java.util.List<Long> tipicitaIds;
     private Long produttoreId;
 }

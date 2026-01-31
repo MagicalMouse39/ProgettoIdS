@@ -25,7 +25,7 @@ public class SocialServiceImpl implements ISocialService {
     }
 
     @Override
-    public PostSocial pubblicaPost(Long aziendaId, Long prodottoId, String testo) {
+    public PostSocial pubblicaPost(Long aziendaId, Long prodottoId, String testo, String urlImmagine) {
         Azienda azienda = aziendaRepository.findById(aziendaId)
                 .orElseThrow(() -> new IllegalArgumentException("Azienda non trovata"));
         Prodotto prodotto = prodottoRepository.findById(prodottoId)
@@ -35,6 +35,7 @@ public class SocialServiceImpl implements ISocialService {
         post.setAzienda(azienda);
         post.setProdotto(prodotto);
         post.setTesto(testo);
+        post.setUrlImmagine(urlImmagine);
         post.setDataPubblicazione(LocalDate.now().toString());
         return postSocialRepository.save(post);
     }

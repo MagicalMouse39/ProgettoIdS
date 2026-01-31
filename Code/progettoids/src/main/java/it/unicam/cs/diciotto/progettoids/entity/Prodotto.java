@@ -31,4 +31,13 @@ public abstract class Prodotto extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "azienda_id")
     private Azienda produttore;
+
+    public Prodotto(String nome, double prezzo) {
+        this.nome = nome;
+        this.prezzo = prezzo;
+    }
+
+    void aggiornaStock(int delta) {
+        this.quantitaDisponibile += delta;
+    }
 }

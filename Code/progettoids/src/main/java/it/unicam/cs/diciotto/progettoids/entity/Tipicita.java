@@ -12,7 +12,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Tipicita extends Prodotto {
+    private String certificazioni;
+
     @OneToOne
     @JoinColumn(name = "processo_id")
     private Processo processoProduttivo;
+
+    public Tipicita(String nome, String certificazioni, Processo processo) {
+        setNome(nome);
+        this.processoProduttivo = processo;
+        this.certificazioni = certificazioni;
+    }
 }

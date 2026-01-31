@@ -1,18 +1,15 @@
 package it.unicam.cs.diciotto.progettoids.controller;
 
+import it.unicam.cs.diciotto.progettoids.dto.ApiDtoMapper;
 import it.unicam.cs.diciotto.progettoids.dto.AziendaRequest;
 import it.unicam.cs.diciotto.progettoids.dto.LoginRequest;
-import it.unicam.cs.diciotto.progettoids.entity.Azienda;
-import it.unicam.cs.diciotto.progettoids.entity.Utente;
+import it.unicam.cs.diciotto.progettoids.dto.response.AziendaResponse;
+import it.unicam.cs.diciotto.progettoids.dto.response.UtenteResponse;
+import it.unicam.cs.diciotto.progettoids.entity.RuoloUtente;
 import it.unicam.cs.diciotto.progettoids.service.GestoreUtenzaService;
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/utenza")
@@ -24,37 +21,46 @@ public class GestoreUtenzaController {
     }
 
     @PostMapping("/login")
-    public Utente login(@RequestBody LoginRequest request) {
-        return gestoreUtenzaService.login(request);
+    public UtenteResponse login(@RequestBody LoginRequest request) {
+        return ApiDtoMapper.toUtenteResponse(gestoreUtenzaService.login(request));
     }
 
     @PostMapping("/aziende")
-    public Azienda registraAzienda(@RequestBody AziendaRequest request) {
-        return gestoreUtenzaService.registraAzienda(request);
+    public AziendaResponse registraAzienda(@RequestBody AziendaRequest request) {
+        return ApiDtoMapper.toAziendaResponse(gestoreUtenzaService.registraAzienda(request));
     }
 
     @PutMapping("/aziende/{id}")
-    public Azienda modificaAzienda(@PathVariable Long id, @RequestBody AziendaRequest request) {
-        return gestoreUtenzaService.modificaDatiAzienda(id, request);
+    public AziendaResponse modificaAzienda(@PathVariable Long id, @RequestBody AziendaRequest request) {
+        return ApiDtoMapper.toAziendaResponse(gestoreUtenzaService.modificaDatiAzienda(id, request));
     }
 
     @PutMapping("/aziende/{id}/approva")
-    public Azienda approvaAzienda(@PathVariable Long id) {
-        return gestoreUtenzaService.approvaRichiestaAzienda(id);
+    public AziendaResponse approvaAzienda(
+            @PathVariable Long id,
+            @RequestParam RuoloUtente ruolo) {
+        return ApiDtoMapper.toAziendaResponse(gestoreUtenzaService.approvaRichiestaAzienda(id, ruolo));
     }
 
     @PutMapping("/aziende/{id}/respingi")
-    public Azienda respingiAzienda(@PathVariable Long id) {
-        return gestoreUtenzaService.respingiRichiestaAzienda(id);
+    public AziendaResponse respingiAzienda(
+            @PathVariable Long id,
+            @RequestParam String motivazione) {
+        return ApiDtoMapper.toAziendaResponse(gestoreUtenzaService.respingiRichiestaAzienda(id, motivazione));
     }
 
     @GetMapping("/aziende")
-    public List<Azienda> listaAziende() {
-        return gestoreUtenzaService.getListaAziende();
+    public List<AziendaResponse> listaAziende() {
+        return ApiDtoMapper.toAziendaResponses(gestoreUtenzaService.getListaAziende());
     }
 
     @GetMapping("/aziende/pending")
-    public List<Azienda> richiesteRegistrazione() {
-        return gestoreUtenzaService.getRichiesteRegistrazione();
+    public List<AziendaResponse> richiesteRegistrazione() {
+        return ApiDtoMapper.toAziendaResponses(gestoreUtenzaService.getRichiesteRegistrazione());
+    }
+
+    @GetMapping("/aziende/mappa")
+    public List<it.unicam.cs.diciotto.progettoids.dto.response.PinResponse> mappaAziende() {
+        return ApiDtoMapper.toPinResponses(gestoreUtenzaService.getMappaAziende());
     }
 }

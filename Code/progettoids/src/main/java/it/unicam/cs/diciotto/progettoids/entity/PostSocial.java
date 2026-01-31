@@ -14,6 +14,7 @@ import lombok.Setter;
 public class PostSocial extends BaseEntity {
     private String testo;
     private String dataPubblicazione;
+    private String urlImmagine;
 
     @ManyToOne
     @JoinColumn(name = "azienda_id")
@@ -22,4 +23,10 @@ public class PostSocial extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "prodotto_id")
     private Prodotto prodotto;
+
+    public PostSocial(String testo, Prodotto prodotto, String urlImmagine) {
+        this.testo = testo;
+        this.prodotto = prodotto;
+        this.urlImmagine = urlImmagine;
+    }
 }

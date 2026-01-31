@@ -11,4 +11,9 @@ import lombok.Setter;
 @Entity
 public class Ingrediente extends Prodotto {
     private String certificazioni;
+
+    public Ingrediente(String nome, String certificazione) {
+        setNome(nome);
+        this.certificazioni = certificazione;
+    }
 }

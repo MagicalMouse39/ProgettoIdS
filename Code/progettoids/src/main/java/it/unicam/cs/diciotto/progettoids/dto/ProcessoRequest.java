@@ -14,5 +14,6 @@ public class ProcessoRequest {
     private int quantitaDisponibile;
     private String dataScadenza;
     private String descrizioneFasi;
+    private java.util.List<Long> ingredientiIds;
     private Long produttoreId;
 }

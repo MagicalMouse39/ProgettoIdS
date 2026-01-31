@@ -8,4 +8,5 @@ import lombok.Setter;
 public class CheckoutRequest {
     private Long carrelloId;
     private String indirizzoConsegna;
+    private Long utenteId;
 }

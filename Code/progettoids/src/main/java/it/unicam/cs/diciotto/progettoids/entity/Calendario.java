@@ -16,9 +16,23 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Calendario extends BaseEntity {
+    private static Calendario _instance;
+    public static Calendario getInstance() {
+        if (_instance == null) {
+            _instance = new Calendario();
+        }
+        return _instance;
+    }
+
     private int annoRiferimento;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "calendario_id")
     private List<Evento> eventi = new ArrayList<>();
+
+    public void addEvento(Evento evento) {
+        if (evento != null) {
+            eventi.add(evento);
+        }
+    }
 }

@@ -1,5 +1,5 @@
 package it.unicam.cs.diciotto.progettoids.service;
 
 public interface INotificaService {
-    void inviaNotifica(String destinatario, String messaggio);
+    void inviaNotifica(it.unicam.cs.diciotto.progettoids.entity.Utente destinatario, String messaggio);
 }

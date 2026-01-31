@@ -13,6 +13,7 @@ public class TipicitaRequest {
     private double prezzo;
     private int quantitaDisponibile;
     private String dataScadenza;
+    private String certificazioni;
     private Long processoId;
     private Long produttoreId;
 }

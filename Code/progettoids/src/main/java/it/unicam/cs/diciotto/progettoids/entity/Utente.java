@@ -24,4 +24,17 @@ public class Utente extends BaseEntity {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "utente_id")
     private Set<Ruolo> ruoli = new HashSet<>();
+
+    public Utente(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public void addRuolo(Ruolo ruolo) {
+        this.ruoli.add(ruolo);
+    }
+
+    public boolean hasRuolo(Ruolo ruolo) {
+        return this.ruoli.stream().anyMatch(r -> r.getTipoRuolo().equals(ruolo));
+    }
 }

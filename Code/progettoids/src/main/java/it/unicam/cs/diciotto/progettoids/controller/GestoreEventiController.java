@@ -1,7 +1,8 @@
 package it.unicam.cs.diciotto.progettoids.controller;
 
+import it.unicam.cs.diciotto.progettoids.dto.ApiDtoMapper;
 import it.unicam.cs.diciotto.progettoids.dto.EventoRequest;
-import it.unicam.cs.diciotto.progettoids.entity.Evento;
+import it.unicam.cs.diciotto.progettoids.dto.response.EventoResponse;
 import it.unicam.cs.diciotto.progettoids.service.GestoreEventiService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,27 +24,27 @@ public class GestoreEventiController {
     }
 
     @PostMapping
-    public Evento creaEvento(@RequestBody EventoRequest request) {
-        return gestoreEventiService.creaEvento(request);
+    public EventoResponse creaEvento(@RequestBody EventoRequest request) {
+        return ApiDtoMapper.toEventoResponse(gestoreEventiService.creaEvento(request));
     }
 
     @PutMapping("/{id}")
-    public Evento modificaEvento(@PathVariable Long id, @RequestBody EventoRequest request) {
-        return gestoreEventiService.modificaEvento(id, request);
+    public EventoResponse modificaEvento(@PathVariable Long id, @RequestBody EventoRequest request) {
+        return ApiDtoMapper.toEventoResponse(gestoreEventiService.modificaEvento(id, request));
     }
 
     @PostMapping("/{id}/invita")
-    public Evento invitaEspositore(@PathVariable Long id, @RequestParam Long aziendaId) {
-        return gestoreEventiService.invitaEspositore(id, aziendaId);
+    public EventoResponse invitaEspositore(@PathVariable Long id, @RequestParam Long aziendaId) {
+        return ApiDtoMapper.toEventoResponse(gestoreEventiService.invitaEspositore(id, aziendaId));
     }
 
     @PostMapping("/{id}/prenota")
-    public Evento prenotaEvento(@PathVariable Long id, @RequestParam Long utenteId) {
-        return gestoreEventiService.prenotaEvento(id, utenteId);
+    public EventoResponse prenotaEvento(@PathVariable Long id, @RequestParam Long utenteId) {
+        return ApiDtoMapper.toEventoResponse(gestoreEventiService.prenotaEvento(id, utenteId));
     }
 
     @GetMapping
-    public List<Evento> listaEventi() {
-        return gestoreEventiService.getListaEventi();
+    public List<EventoResponse> listaEventi() {
+        return ApiDtoMapper.toEventoResponses(gestoreEventiService.getListaEventi());
     }
 }

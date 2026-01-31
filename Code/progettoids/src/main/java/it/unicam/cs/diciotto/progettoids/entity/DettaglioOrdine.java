@@ -18,4 +18,10 @@ public class DettaglioOrdine extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "prodotto_id")
     private Prodotto prodottoRiferimento;
+
+    public DettaglioOrdine(int quantita, Prodotto prodottoRiferimento, double prezzo) {
+        this.quantita = quantita;
+        this.prodottoRiferimento = prodottoRiferimento;
+        this.prezzoUnitarioSnapshot = prezzo;
+    }
 }

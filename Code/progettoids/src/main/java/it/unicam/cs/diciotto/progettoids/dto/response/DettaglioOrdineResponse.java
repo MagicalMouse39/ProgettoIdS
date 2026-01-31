@@ -1,0 +1,15 @@
+package it.unicam.cs.diciotto.progettoids.dto.response;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class DettaglioOrdineResponse {
+    private Long id;
+    private Long prodottoId;
+    private int quantita;
+    private double prezzoUnitarioSnapshot;
+}

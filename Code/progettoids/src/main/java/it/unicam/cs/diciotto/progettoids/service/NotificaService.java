@@ -4,8 +4,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NotificaService implements INotificaService {
+    public NotificaService() {}
+
     @Override
-    public void inviaNotifica(String destinatario, String messaggio) {
-        // Placeholder: integrate email/SMS/push
+    public void inviaNotifica(it.unicam.cs.diciotto.progettoids.entity.Utente destinatario, String messaggio) {
+        // Placeholder: implementazione futura.
     }
 }

@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrdineRepository extends JpaRepository<Ordine, Long> {
     List<Ordine> findByStato(StatoOrdine stato);
+
+    List<Ordine> findByStatoAndUtente_Id(StatoOrdine stato, Long utenteId);
 }
